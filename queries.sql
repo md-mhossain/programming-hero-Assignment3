@@ -1,14 +1,14 @@
 
 
--- -- check current database
+-- -- -- check current database
 SELECT current_database();
 
 
--- -- create database
+-- -- -- create database
 CREATE DATABASE rental_system;
 
 
--- -- create users table
+-- -- -- create users table
 CREATE TYPE user_role AS ENUM ('customer', 'admin');
 CREATE TABLE USERS (
     user_id SERIAL PRIMARY KEY,
@@ -22,7 +22,7 @@ CREATE TABLE USERS (
 );
 
 
--- -- create vehicles table
+-- -- -- create vehicles table
 CREATE TYPE car_type AS ENUM ('car', 'bike', 'truck');
 CREATE TYPE vehicle_status AS ENUM ('available', 'rented', 'maintenance');
 CREATE TABLE VEHICLES(
@@ -38,7 +38,7 @@ CREATE TABLE VEHICLES(
 )
 
 
--- -- create bookings table
+-- -- -- create bookings table
 CREATE TYPE booking_status AS ENUM ('pending', 'confirmed', 'completed', 'cancelled');
 CREATE TABLE BOOKINGS (
     booking_id SERIAL PRIMARY KEY,
@@ -55,7 +55,7 @@ CREATE TABLE BOOKINGS (
 );
 
 
--- -- insert sample data into users table
+-- -- -- insert sample data into users table
 INSERT INTO users (name, email, password, phone, role)
 VALUES
 ('John Doe', 'john.doe@example.com', 'hashed_password_1', '1234567890', 'customer'),
@@ -65,7 +65,7 @@ VALUES
 ('Admin User', 'admin@rental.com', 'hashed_password_admin', '1112223333', 'admin');
 
 
--- -- -- insert sample data into vehicles table
+-- -- -- -- insert sample data into vehicles table
 INSERT INTO vehicles (name, type, model, registration_number, rental_price, availability_status)
 VALUES
 ('Toyota Camry', 'car', '2020', 'ABC123', 50.00, 'available'),
@@ -85,7 +85,7 @@ VALUES
 ('Tesla Model 3', 'car', '2024', 'DHA-9900', 150.00, 'available');
 
 
--- -- insert sample data into bookings table
+-- -- -- insert sample data into bookings table
 INSERT INTO bookings (user_id, vehicle_id, start_date, end_date, booking_status, total_cost)
 VALUES
 (1, 1, '2024-07-01', '2024-07-05', 'confirmed', 250.00),
@@ -98,7 +98,7 @@ VALUES
 
 
 
--- -- Retrieve booking information customer, vehicle name using with inner join
+-- -- -- Retrieve booking information customer, vehicle name using with inner join
 select booking_id,
     u.name as customer_name,
     v.name as vehicle_name,
@@ -110,7 +110,7 @@ FROM BOOKINGS as b
     INNER JOIN vehicles as v ON v.vehicle_id = b.vehicle_id;
 
 
--- -- Find all vehicles that have never been booked.
+-- -- -- Find all vehicles that have never been booked.
 SELECT vehicle_id,
     name,
     type,
@@ -126,7 +126,7 @@ WHERE NOT EXISTS (
 );
 
 
--- -- Retrieve all available vehicles of a specific type (e.g. cars).
+-- -- -- Retrieve all available vehicles of a specific type (e.g. cars).
 SELECT vehicle_id,
     name,
     type,
@@ -139,7 +139,7 @@ WHERE type = 'car'
     AND availability_status = 'available';
 
 
--- --Find the total number of bookings for each vehicle and display only those vehicles that have more than 2 bookings.
+-- -- --Find the total number of bookings for each vehicle and display only those vehicles that have more than 2 bookings.
 SELECT name AS vehicle_name,
     COUNT(*) AS total_bookings
 FROM vehicles
@@ -148,9 +148,9 @@ GROUP BY name
 HAVING COUNT(*) > 2;
 
 
--- -- rename column name with using alter
+-- -- -- rename column name with using alter
 ALTER TABLE bookings
     RENAME COLUMN status TO booking_status;
 
-ALTER TABLE vehicles
+-- ALTER TABLE vehicles
     RENAME COLUMN status TO availability_status;

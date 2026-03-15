@@ -151,6 +151,16 @@ HAVING COUNT(*) > 2;
 
 
 
+## viva Videos
+
+| Video | Questions | Link |
+|------|-------------|------|
+| 1 | What is a foreign key and why is it important in relational databases? | https://www.loom.com/share/72679d3bff0c407a97c9a5129887f5e1|
+| 2 | What is the difference between WHERE and HAVING clauses in SQL? | https://www.loom.com/share/cd8ed27e148144c18e4ad4712d32dc73 |
+| 3 | What is a primary key and what are its characteristics? | https://www.loom.com/share/e8f139237cdd4059961b3cf5bf45531b |
+| 4 | What is the difference between INNER JOIN and LEFT JOIN in SQL?| https://www.loom.com/share/33b656b454ba46958e09169a9fa7430d |
+
+
 
 
 
